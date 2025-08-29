@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS3 Content Hub - O seu portal de downloads para PlayStation 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Fundo escuro principal */
+        }
+        .ps-blue {
+            color: #0070d1;
+        }
+        .bg-ps-blue {
+            background-color: #0070d1;
+        }
+        .border-ps-blue {
+            border-color: #0070d1;
+        }
+        .card-bg {
+            background-color: #1e1e1e;
+        }
+        .search-bar:focus {
+            box-shadow: 0 0 0 2px #0070d1;
+            outline: none;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 15px rgba(0, 112, 209, 0.8);
+        }
+        .filter-btn.active {
+            background-color: #0070d1;
+            box-shadow: 0 0 15px rgba(0, 112, 209, 0.8);
+        }
+        .btn-secondary {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+        .btn-secondary:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Cabeçalho e Navegação -->
+    <header class="bg-black bg-opacity-80 backdrop-blur-sm sticky top-0 z-50 shadow-lg shadow-blue-500/10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-3xl font-black tracking-wider">
+                PS3<span class="ps-blue">HUB</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="hover:text-ps-blue transition duration-300">Jogos</a>
+                <a href="#" class="hover:text-ps-blue transition duration-300">DLCs</a>
+                <a href="#" class="hover:text-ps-blue transition duration-300">Homebrew</a>
+                <a href="#" class="hover:text-ps-blue transition duration-300">Temas</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-90">
+        <a href="#" class="block text-center py-2 px-4 text-sm hover:bg-gray-800">Jogos</a>
+        <a href="#" class="block text-center py-2 px-4 text-sm hover:bg-gray-800">DLCs</a>
+        <a href="#" class="block text-center py-2 px-4 text-sm hover:bg-gray-800">Homebrew</a>
+        <a href="#" class="block text-center py-2 px-4 text-sm hover:bg-gray-800">Temas</a>
+    </div>
+
+    <!-- Secção Principal (Hero) -->
+    <main class="container mx-auto px-6 py-12">
+        <section class="text-center mb-16">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
+                Explore o Universo<br>da sua <span class="ps-blue">PlayStation 3</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+                Encontre os melhores jogos, expansões, aplicações e temas para a sua consola. Tudo num só lugar.
+            </p>
+            <div class="relative max-w-xl mx-auto">
+                <input id="search-input" type="search" placeholder="Procurar por 'Call of Duty'..." class="w-full bg-gray-800 text-white border-2 border-gray-700 rounded-full py-3 px-6 text-lg transition duration-300 focus:border-ps-blue search-bar">
+                <svg class="w-6 h-6 text-gray-500 absolute right-6 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </section>
+
+        <!-- Filtros de Conteúdo -->
+        <section class="mb-12">
+            <div id="filter-container" class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn bg-gray-800 hover:bg-ps-blue text-white font-semibold py-2 px-6 rounded-full transition duration-300 active" data-region="All">Todos</button>
+                <button class="filter-btn bg-gray-800 hover:bg-ps-blue text-white font-semibold py-2 px-6 rounded-full transition duration-300" data-region="EU">Europa</button>
+                <button class="filter-btn bg-gray-800 hover:bg-ps-blue text-white font-semibold py-2 px-6 rounded-full transition duration-300" data-region="US">América</button>
+                <button class="filter-btn bg-gray-800 hover:bg-ps-blue text-white font-semibold py-2 px-6 rounded-full transition duration-300" data-region="JP">Japão</button>
+                 <button class="filter-btn bg-gray-800 hover:bg-ps-blue text-white font-semibold py-2 px-6 rounded-full transition duration-300" data-region="ASIA">Ásia</button>
+            </div>
+        </section>
+
+        <!-- Grelha de Conteúdo -->
+        <section>
+            <div id="content-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+                <!-- O conteúdo será inserido aqui via JavaScript -->
+            </div>
+            <div id="loading" class="text-center text-2xl mt-8">
+                A carregar conteúdo...
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-black mt-20">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 PS3HUB. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Este site não é afiliado à Sony ou PlayStation. O conteúdo é fornecido pela comunidade.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Função para copiar texto para a área de transferência
+        function copyToClipboard(text, element) {
+            const originalText = element.innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                 navigator.clipboard.writeText(text).then(() => {
+                    element.innerText = 'Copiado!';
+                    setTimeout(() => {
+                        element.innerText = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Erro ao copiar RAP:', err);
+                });
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed"; 
+                textArea.style.left = "-9999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    element.innerText = 'Copiado!';
+                    setTimeout(() => {
+                        element.innerText = originalText;
+                    }, 2000);
+                } catch (err) {
+                    console.error('Fallback: Erro ao copiar', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- CONFIGURAÇÃO ---
+            // Adicione aqui os links para os seus ficheiros .tsv
+            const tsvUrls = [
+                'http://nopaystation.com/tsv/PS3_GAMES.tsv',
+                // Pode adicionar mais links aqui, por exemplo:
+                 'http://nopaystation.com/tsv/PS3_DLCS.tsv',
+                 'http://nopaystation.com/tsv/PS3_THEMES.tsv',
+                 'http://nopaystation.com/tsv/PS3_AVATARS.tsv',
+                 'http://nopaystation.com/tsv/PS3_DEMOS.tsv'
+            ];
+            // --------------------
+
+            const contentGrid = document.getElementById('content-grid');
+            const searchInput = document.getElementById('search-input');
+            const filterContainer = document.getElementById('filter-container');
+            const loadingIndicator = document.getElementById('loading');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            let allGames = [];
+            let currentFilter = 'All';
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            function formatBytes(bytes, decimals = 2) {
+                if (bytes === 0 || isNaN(bytes)) return 'N/A';
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            }
+
+            // Função para buscar e processar múltiplos ficheiros TSV
+            async function fetchAndProcessData() {
+                // Promise.allSettled tenta carregar todos os links, mesmo que alguns falhem
+                const results = await Promise.allSettled(tsvUrls.map(url => fetch(url).then(res => res.text())));
+                
+                let combinedTsvData = '';
+                let successfulLoads = 0;
+
+                results.forEach((result, index) => {
+                    if (result.status === 'fulfilled') {
+                        console.log(`Ficheiro ${tsvUrls[index]} carregado com sucesso.`);
+                        // Remove o cabeçalho de todos os ficheiros, exceto o primeiro
+                        const lines = result.value.trim().replace(/\r/g, '').split('\n');
+                        const content = (successfulLoads > 0) ? lines.slice(1).join('\n') : lines.join('\n');
+                        combinedTsvData += content + '\n';
+                        successfulLoads++;
+                    } else {
+                        console.error(`Falha ao carregar ${tsvUrls[index]}:`, result.reason);
+                    }
+                });
+
+                if (successfulLoads > 0) {
+                    parseTsv(combinedTsvData);
+                } else {
+                    console.error("Nenhum ficheiro TSV pôde ser carregado.");
+                    loadingIndicator.textContent = 'Falha ao carregar todas as listas. A carregar dados de exemplo...';
+                    useFallbackData();
+                }
+            }
+            
+            function parseTsv(tsvData) {
+                const lines = tsvData.trim().split('\n');
+                if (lines.length < 2) {
+                    console.error("Dados TSV vazios ou com formato inválido.");
+                    loadingIndicator.textContent = 'Ficheiro de dados inválido.';
+                    return;
+                }
+                
+                const headers = lines[0].split('\t').map(h => h.trim());
+                
+                allGames = lines.slice(1).map(line => {
+                    const values = line.split('\t');
+                    // Ignora linhas em branco
+                    if (values.length < headers.length) return null;
+                    const game = {};
+                    headers.forEach((header, index) => {
+                        game[header] = values[index] ? values[index].trim() : '';
+                    });
+                    return game;
+                }).filter(game => game !== null); // Remove linhas nulas
+                
+                displayGames();
+                loadingIndicator.style.display = 'none';
+            }
+
+            function useFallbackData() {
+                 const fallbackTsvData = `Title ID	Region	Name	PKG direct link	RAP	Content ID	Last Modification Date	Download .RAP file	File Size	SHA256
+NPEB00113	EU	Call of Duty Classic French Version	http://zeus.dl.playstation.net/cdn/EP0002/NPEB00113_00/SNhRkR6CwU5mHbsD6eeliocSFWu971vOE5MAMEtl59UKYDh6TQlPTgymBjkD1SK5JMEtdVWKm9AfxbUKNdHyeWovrXa9n48cKsv7r.pkg	1763B2473C1553028847437992400021	EP0002-NPEB00113_00-CALLOFDUTYCLSCFR	2018-02-17 01:59:45		987927856	
+NPUA30002	US	Bejeweled 2	http://ares.dl.playstation.net/cdn/UP0017/NPUA30002_00/Jtjh2BLj2lxls0no6QHRYAObnFH1O0fx3fMopA51KWAxNvCgyId4ca9TICIJYOcud74Tj35aevkqpfpSn6Hbxjl1YcTgkgD9G80oh.pkg	NOT REQUIRED	UP0017-NPUA30002_00-BEJEWELEDGAMEPS3	2018-02-06 20:03:40		23352560`;
+                parseTsv(fallbackTsvData);
+            }
+
+
+            function displayGames() {
+                contentGrid.innerHTML = '';
+                const searchTerm = searchInput.value.toLowerCase();
+
+                const filteredGames = allGames.filter(game => {
+                    const matchesSearch = game.Name && game.Name.toLowerCase().includes(searchTerm);
+                    const matchesFilter = (currentFilter === 'All' || game.Region === currentFilter);
+                    return matchesSearch && matchesFilter;
+                });
+
+                if (filteredGames.length === 0) {
+                    contentGrid.innerHTML = `<p class="col-span-full text-center text-gray-400">Nenhum resultado encontrado.</p>`;
+                    return;
+                }
+
+                filteredGames.forEach(game => {
+                    const card = document.createElement('div');
+                    card.className = 'card-bg rounded-lg overflow-hidden flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-blue-500/50';
+                    
+                    const gameNameShort = game.Name.length > 35 ? game.Name.substring(0, 32) + '...' : game.Name;
+                    const placeholderText = encodeURIComponent(game.Name.split(' ')[0]);
+                    const fileSize = formatBytes(parseInt(game['File Size']));
+
+                    const hasRap = game.RAP && game.RAP !== 'MISSING' && game.RAP !== 'NOT REQUIRED';
+                    const rapButtonHTML = hasRap 
+                        ? `<button class="w-full text-center btn-secondary text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 text-xs" onclick="copyToClipboard('${game.RAP}', this)">Copiar RAP</button>`
+                        : '';
+
+                    card.innerHTML = `
+                        <div>
+                            <img src="https://placehold.co/300x400/1e1e1e/FFFFFF?text=${placeholderText}" alt="Capa de ${game.Name}" class="w-full h-56 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x400/1e1e1e/FFFFFF?text=No+Image';">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-1 h-14" title="${game.Name}">${gameNameShort}</h3>
+                                <div class="flex justify-between text-gray-400 text-sm mb-4">
+                                    <span>Região: <span class="font-semibold text-white">${game.Region}</span></span>
+                                    <span>Tamanho: <span class="font-semibold text-white">${fileSize}</span></span>
+                                </div>
+                                <p class="text-gray-400 text-xs">ID: ${game['Title ID']}</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 space-y-2">
+                            <a href="${game['PKG direct link']}" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-ps-blue text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 btn-glow ${game['PKG direct link'] === 'MISSING' ? 'opacity-50 cursor-not-allowed' : ''}">
+                                ${game['PKG direct link'] === 'MISSING' ? 'Indisponível' : 'Download PKG'}
+                            </a>
+                            ${rapButtonHTML}
+                        </div>
+                    `;
+                    contentGrid.appendChild(card);
+                });
+            }
+
+            searchInput.addEventListener('input', displayGames);
+
+            filterContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    currentFilter = e.target.dataset.region;
+                    displayGames();
+                }
+            });
+
+            // Iniciar a aplicação
+            fetchAndProcessData();
+        });
+    </script>
+</body>
+</html>
